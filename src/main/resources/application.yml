@@ -81,7 +81,7 @@ fixconnect:
     project-id: fixconnect-ai
   # Public address of the site, used in the forgot-password and admin e-mail links.
   # On Render, change this to the address Render gives you (e.g. https://fixconnect-ai.onrender.com).
-  app-base-url: https://fixconnect-ai.onrender.com
+  app-base-url: https://fixconnect-ai-mqx1.onrender.com
   admin:
     # Gets an e-mail with a "Review & Verify" link whenever a new service provider signs up
     alert-email: adminfixconnectai@gmail.com
