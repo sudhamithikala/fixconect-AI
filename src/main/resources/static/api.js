@@ -581,6 +581,7 @@
   function injectStyles() {
     if (document.getElementById('fc-api-styles')) return;
     const css = `
+      .fc-pw{position:relative;display:block}.fc-pw>input{padding-right:46px!important}.fc-eye{position:absolute;right:8px;top:50%;transform:translateY(-50%);width:32px;height:32px;display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:8px;background:transparent;color:#64748b;cursor:pointer;padding:0}.input-wrap>.fc-eye{position:static;transform:none}.fc-eye:hover{background:rgba(28,111,229,.08);color:#1c6fe5}.fc-eye svg{width:18px;height:18px;fill:currentColor}html[data-theme=dark] .fc-eye{color:#94a3b8}html[data-theme=dark] .fc-eye:hover{background:rgba(148,163,184,.14);color:#dbe4f0}
       .fc-toast-wrap{position:fixed;right:18px;bottom:18px;z-index:9999;display:flex;flex-direction:column;gap:10px;max-width:min(380px,calc(100vw - 36px))}
       .fc-toast{background:#0f172a;color:#fff;padding:12px 16px;border-radius:12px;box-shadow:0 10px 30px rgba(15,23,42,.25);font:600 .88rem/1.4 Inter,system-ui,sans-serif;white-space:pre-line;animation:fcIn .2s ease-out}
       .fc-toast{display:flex;align-items:flex-start;gap:12px}.fc-toast>span{flex:1}.fc-toast-x{background:none;border:0;color:inherit;opacity:.8;font-size:1.3rem;line-height:1;cursor:pointer;padding:0 2px;margin:-2px -4px 0 0}.fc-toast-x:hover{opacity:1}.fc-toast.success{background:#166534}.fc-toast.error{background:#b91c1c}.fc-toast.info{background:#1d4ed8}
@@ -710,6 +711,38 @@
     try { return await fn(); } finally { button.disabled = false; button.innerHTML = old; }
   }
 
+  // ---------------------------------------------------------------- show / hide password (eye button)
+  const EYE = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5c4.79 0 8.91 3.03 10.95 7-2.04 3.97-6.16 7-10.95 7S3.09 15.97 1.05 12C3.09 8.03 7.21 5 12 5Zm0 2.2A8.66 8.66 0 0 0 4.16 12c1.81 2.35 4.52 3.8 7.84 3.8s6.03-1.45 7.84-3.8A8.66 8.66 0 0 0 12 7.2Zm0 2.2a3.4 3.4 0 1 1 0 6.8 3.4 3.4 0 0 1 0-6.8Z"/></svg>';
+  const EYE_OFF = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.3 2.3 21.7 20.7l-1.4 1.4-3.2-3.2A11.6 11.6 0 0 1 12 19c-4.79 0-8.91-3.03-10.95-7a12.9 12.9 0 0 1 4.1-4.7L1.9 3.7l1.4-1.4ZM6.6 8.8A10.4 10.4 0 0 0 4.16 12c1.81 2.35 4.52 3.8 7.84 3.8 1.06 0 2.06-.15 2.98-.44l-1.84-1.84a3.4 3.4 0 0 1-4.66-4.66L6.6 8.8ZM12 5c4.79 0 8.91 3.03 10.95 7a12.8 12.8 0 0 1-2.9 3.7l-1.56-1.56A10.5 10.5 0 0 0 19.84 12 8.66 8.66 0 0 0 12 7.2c-.5 0-.98.03-1.45.1L8.7 5.46C9.77 5.16 10.87 5 12 5Z"/></svg>';
+  function addPasswordEye(input) {
+    if (input.dataset.fcEye) return;
+    const parent = input.parentElement;
+    if (!parent || parent.querySelector('.toggle-password, .fc-eye')) return;  // page already has its own (login)
+    input.dataset.fcEye = '1';
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'fc-eye';
+    btn.innerHTML = EYE;
+    btn.setAttribute('aria-label', 'Show password');
+    btn.title = 'Show password';
+    btn.addEventListener('click', () => {
+      const show = input.type === 'password';
+      input.type = show ? 'text' : 'password';
+      btn.innerHTML = show ? EYE_OFF : EYE;
+      btn.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
+      btn.title = show ? 'Hide password' : 'Show password';
+      input.focus();
+    });
+    if (parent.classList.contains('input-wrap')) { parent.appendChild(btn); return; }
+    const wrap = document.createElement('span');
+    wrap.className = 'fc-pw';
+    parent.insertBefore(wrap, input);
+    wrap.appendChild(input);
+    wrap.appendChild(btn);
+  }
+  function mountPasswordEyes(root) {
+    (root || document).querySelectorAll('input[type="password"]').forEach(addPasswordEye);
+  }
   // ---------------------------------------------------------------- navbar / logout wiring
   function wireChrome() {
     document.querySelectorAll('.logout-link').forEach((a) => {
@@ -729,6 +762,16 @@
   document.addEventListener('DOMContentLoaded', () => {
     injectStyles();
     wireChrome();
+    mountPasswordEyes(document);
+    // password fields added later (pop-ups, forgot-password step 2)
+    if (window.MutationObserver) {
+      new MutationObserver((list) => {
+        for (const m of list) for (const n of m.addedNodes) {
+          if (n.nodeType !== 1) continue;
+          if (n.matches && n.matches('input[type="password"]')) addPasswordEye(n); else if (n.querySelectorAll) mountPasswordEyes(n);
+        }
+      }).observe(document.body, { childList: true, subtree: true });
+    }
   });
 
   // ---------------------------------------------------------------- export
@@ -737,7 +780,7 @@
     getToken, getUser, isLoggedIn, login, logout, saveSession, clearSession,
     requireAuth, redirectToLogin, dashboardFor, afterLoginTarget, flash,
     esc, money, fmtDate, fmtDateTime, fmtSlot, timeAgo, parseDate, stars, badge,
-    SLOT_LABEL, SLOT_TIME, categoryCode, categories, techPhoto, avatarSrc, initials, mountPhotoControls, currentPosition, passwordError, PASSWORD_HINT, phoneError,
+    SLOT_LABEL, SLOT_TIME, categoryCode, categories, techPhoto, avatarSrc, initials, mountPhotoControls, currentPosition, mountPasswordEyes, passwordError, PASSWORD_HINT, phoneError,
     skeleton, mountSkeletons, stopSkeletons,
     nameError, emailError, addressError, cityError, pincodeError, areaError, textError, numberError, labelError, upiError, ifscError, accountNoError, firstError,
     toast, showError, modal, confirmDialog, busy,
