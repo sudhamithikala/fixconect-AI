@@ -1,0 +1,181 @@
+/* ==========================================================================
+   FIXCONNECT AI - theme toggle button + dark theme colours
+   Light mode is untouched: every colour in the other stylesheets is written as
+   var(--fcd-..., <original colour>), and only dark mode defines --fcd-* values.
+   ========================================================================== */
+
+/* ---- toggle button (header is navy in both themes, so a light icon works) ---- */
+.fc-theme-toggle {
+  flex: 0 0 auto;
+  width: 40px;
+  height: 40px;
+  margin-left: 4px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+.fc-theme-toggle:hover { background: rgba(255, 255, 255, 0.18); transform: rotate(-12deg); }
+.fc-theme-toggle:focus-visible { outline: 2px solid #4ea5ff; outline-offset: 2px; }
+.fc-theme-toggle.fc-theme-toggle-float {
+  position: fixed; top: auto; right: auto; left: 14px; bottom: 14px; z-index: 9990; width: 42px; height: 42px; margin: 0;
+  background: #061a36; border-color: rgba(255, 255, 255, 0.2); box-shadow: 0 10px 24px rgba(8, 31, 65, 0.3);
+}
+@media (min-width: 761px) {
+  /* desktop: keep the links right-aligned, toggle sits after them */
+  .topbar .nav-wrap.has-theme-toggle > .main-nav { margin-left: auto; }
+  .topbar .nav-wrap.has-theme-toggle > .fc-theme-toggle { margin-left: 14px; }
+}
+@media (max-width: 760px) {
+  /* phones: header is two rows - put the toggle on the logo row, next to SOS */
+  .topbar .nav-wrap.has-theme-toggle .fc-theme-toggle { position: absolute; top: 13px; right: 0; width: 36px; height: 36px; margin: 0; }
+  .topbar .nav-wrap.has-theme-toggle .main-nav .nav-button-accent { right: 44px; }
+  .topbar .nav-wrap.theme-toggle-floating .main-nav .nav-button-accent { right: 0; }
+}
+
+/* ---- dark theme ---- */
+html[data-theme="dark"] {
+  color-scheme: dark;
+  background-color: #0b1322;
+  --fcd-bd-0c2a4aa6: rgba(185, 196, 213, 0.12);
+  --fcd-bd-0d2a4aa5: rgba(185, 196, 213, 0.12);
+  --fcd-bd-0d2a4aa6: rgba(185, 196, 213, 0.12);
+  --fcd-bd-10223fa10: rgba(185, 196, 213, 0.16);
+  --fcd-bd-10223fa12: rgba(185, 196, 213, 0.192);
+  --fcd-bd-10223fa13: rgba(185, 196, 213, 0.208);
+  --fcd-bd-10223fa8: rgba(185, 196, 213, 0.128);
+  --fcd-bd-112844a12: rgba(185, 196, 213, 0.192);
+  --fcd-bd-112a4aa12: rgba(185, 196, 213, 0.192);
+  --fcd-bd-122e52a8: rgba(185, 196, 213, 0.128);
+  --fcd-bd-123d69a12: rgba(185, 196, 213, 0.192);
+  --fcd-bd-123d69a22: rgba(185, 196, 213, 0.35);
+  --fcd-bd-123d69a8: rgba(185, 196, 213, 0.128);
+  --fcd-bd-bae6fd: #2b4350;
+  --fcd-bd-c7e0f8: #2b3e50;
+  --fcd-bd-cbd5e1: #2a3546;
+  --fcd-bd-d3deee: #2b3a50;
+  --fcd-bd-dbeafe: #2b3b50;
+  --fcd-bd-e2e8f0: #2b3b50;
+  --fcd-bd-e5edf7: #2b3b50;
+  --fcd-bd-ecf1f8: #2b3a50;
+  --fcd-bd-edf1f6: #2b3b50;
+  --fcd-bd-f4f8fc: #2b3d50;
+  --fcd-bd-fca5a5: #502b2b;
+  --fcd-bd-fca5a5a30: rgba(80, 43, 43, 0.3);
+  --fcd-bd-fecaca: #502b2b;
+  --fcd-bd-fecdd3: #502b2f;
+  --fcd-bd-fee2e2: #502b2b;
+  --fcd-bd-ffe4e6: #502b2e;
+  --fcd-bd-ffe58f: #50472b;
+  --fcd-bd-ffffff: #2a3546;
+  --fcd-bd-ffffffa60: rgba(42, 53, 70, 0.6);
+  --fcd-bg-061a36a2: rgba(185, 196, 213, 0.06);
+  --fcd-bg-061a36a30: rgba(185, 196, 213, 0.35);
+  --fcd-bg-10223fa12: rgba(185, 196, 213, 0.192);
+  --fcd-bg-4ea5ffa10: rgba(43, 61, 80, 0.1);
+  --fcd-bg-4ea5ffa12: rgba(43, 61, 80, 0.12);
+  --fcd-bg-4ea5ffa15: rgba(43, 61, 80, 0.15);
+  --fcd-bg-4ea5ffa18: rgba(43, 61, 80, 0.18);
+  --fcd-bg-4ea5ffa20: rgba(43, 61, 80, 0.2);
+  --fcd-bg-4ea5ffa23: rgba(43, 61, 80, 0.23);
+  --fcd-bg-4ea5ffa35: rgba(43, 61, 80, 0.35);
+  --fcd-bg-cbd5e1: #2e3a4c;
+  --fcd-bg-d3deee: #18283f;
+  --fcd-bg-dceeff: #162c41;
+  --fcd-bg-dcfce7: #164125;
+  --fcd-bg-e0f2fe: #163041;
+  --fcd-bg-e2e8f0: #1e2939;
+  --fcd-bg-e7f8ee: #164128;
+  --fcd-bg-e8eef7: #162740;
+  --fcd-bg-e9eef4: #1d2a3a;
+  --fcd-bg-e9f7ef: #174028;
+  --fcd-bg-eaf1ff: #162441;
+  --fcd-bg-eaf3ff: #162841;
+  --fcd-bg-ecf1f8: #17283f;
+  --fcd-bg-edf4ff: #162741;
+  --fcd-bg-edf5ff: #162941;
+  --fcd-bg-eef2f7: #1c2a3b;
+  --fcd-bg-eef4ff: #162541;
+  --fcd-bg-eef6ff: #162a41;
+  --fcd-bg-eff6ff: #162941;
+  --fcd-bg-f0f7ff: #0c141f;
+  --fcd-bg-f0fdf4: #164123;
+  --fcd-bg-f3e8ff: #2a1641;
+  --fcd-bg-f3f8ff: #0c141f;
+  --fcd-bg-f4f7fb: #0c141f;
+  --fcd-bg-f4f8fc: #0c141f;
+  --fcd-bg-f4f9ff: #0c141f;
+  --fcd-bg-f5f9ff: #0c141f;
+  --fcd-bg-f6f8fb: #0c141f;
+  --fcd-bg-f7faff: #0c141f;
+  --fcd-bg-f7fbff: #0c141f;
+  --fcd-bg-f8fafc: #0c141f;
+  --fcd-bg-f8fbff: #0c141f;
+  --fcd-bg-fca5a5a10: rgba(80, 43, 43, 0.1);
+  --fcd-bg-fcfdfe: #0c141f;
+  --fcd-bg-fee2e2: #411616;
+  --fcd-bg-fef2f2: #0c141f;
+  --fcd-bg-fef3c7: #413816;
+  --fcd-bg-fff1f2: #0c141f;
+  --fcd-bg-fff4dc: #413316;
+  --fcd-bg-fffbe6: #413a16;
+  --fcd-bg-ffffff: #121d2d;
+  --fcd-bg-ffffffa72: rgba(18, 29, 45, 0.72);
+  --fcd-bg-ffffffa85: rgba(18, 29, 45, 0.85);
+  --fcd-bg-ffffffa95: rgba(18, 29, 45, 0.95);
+  --fcd-bg-ffffffa96: rgba(18, 29, 45, 0.96);
+  --fcd-tx-0369a1: #5fc4fc;
+  --fcd-tx-061a36: #dfe4ec;
+  --fcd-tx-071a33: #dfe5ec;
+  --fcd-tx-0a192f: #dfe4ec;
+  --fcd-tx-0b1b3f: #dfe3ec;
+  --fcd-tx-10223f: #dfe4ec;
+  --fcd-tx-102a5c: #dfe3ec;
+  --fcd-tx-123d69: #dfe5ec;
+  --fcd-tx-12805c: #dfece8;
+  --fcd-tx-15803d: #dfece4;
+  --fcd-tx-166534: #dfece4;
+  --fcd-tx-16a34a: #6fec9d;
+  --fcd-tx-1c6fe5: #78a9ef;
+  --fcd-tx-2d3a51: #dfe4ec;
+  --fcd-tx-334155: #dfe4ec;
+  --fcd-tx-475569: #aab5c5;
+  --fcd-tx-5e6d84: #acb5c4;
+  --fcd-tx-5f6f87: #abb5c4;
+  --fcd-tx-64748b: #acb6c3;
+  --fcd-tx-66778c: #acb6c3;
+  --fcd-tx-66778e: #acb6c3;
+  --fcd-tx-68788e: #adb6c3;
+  --fcd-tx-687990: #acb6c3;
+  --fcd-tx-6b7a90: #adb6c2;
+  --fcd-tx-718096: #adb6c2;
+  --fcd-tx-7f1d1d: #e17a7a;
+  --fcd-tx-92400e: #f19d6a;
+  --fcd-tx-9333ea: #c48ff4;
+  --fcd-tx-991b1b: #e77474;
+  --fcd-tx-b91c1c: #ea7171;
+  --fcd-tx-d46b08: #f9ab62;
+  --fcd-tx-d92d20: #eb7d74;
+  --fcd-tx-d97706: #fbb360;
+  --fcd-tx-dc2626: #ea7e7e;
+  --fcd-tx-f59e0b: #f9c56d;
+}
+html[data-theme="dark"] body { background-color: #0b1322; color: #dbe4f0; }
+/* map: darken the street tiles so they match the page */
+html[data-theme="dark"] .leaflet-tile-pane { filter: invert(1) hue-rotate(180deg) brightness(0.9) contrast(0.9) saturate(0.7); }
+html[data-theme="dark"] .leaflet-container { background: #0b1322; }
+/* photos and pictures keep their normal colours; soften very bright ones slightly */
+html[data-theme="dark"] img:not([src$=".svg"]) { filter: brightness(0.92); }
+html[data-theme="dark"] ::placeholder { color: #7d8ca3; }
+html[data-theme="dark"] ::selection { background: #1c6fe5; color: #ffffff; }
+
+/* form fields that have no colour of their own (zero specificity: any page rule wins) */
+:where(html[data-theme="dark"]) :where(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]), select, textarea) {
+  background-color: #0f1828;
+  color: #dbe4f0;
+  border-color: #2a3a50;
+}

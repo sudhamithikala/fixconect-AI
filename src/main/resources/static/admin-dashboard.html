@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Console | FixConnect AI</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="description" content="FixConnect AI administrator console: verify service providers and manage account status." />
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="dashboard.css" />
+  <style>
+    .admin-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+    .admin-tab { border: 1px solid var(--fcd-bd-ecf1f8, var(--slate-200, #e2e8f0)); background: var(--fcd-bg-ffffff, #fff); border-radius: 999px; padding: 8px 16px;
+      font: 700 0.85rem/1 Inter, sans-serif; color: var(--fcd-tx-2d3a51, var(--slate-700, #334155)); cursor: pointer; }
+    .admin-tab.active { background: var(--navy-900, #0b1b3f); color: #fff; border-color: var(--navy-900, #0b1b3f); }
+    .admin-person { display: flex; flex-direction: column; gap: 2px; }
+    .admin-person small { color: var(--fcd-tx-5f6f87, var(--slate-500, #64748b)); }
+    .check-row { display: flex; gap: 6px; flex-wrap: wrap; }
+    .check-chip { font-size: 0.72rem; font-weight: 700; padding: 3px 8px; border-radius: 999px; background: var(--fcd-bg-fef3c7, #fef3c7); color: var(--fcd-tx-92400e, #92400e); }
+    .check-chip.ok { background: var(--fcd-bg-dcfce7, #dcfce7); color: var(--fcd-tx-166534, #166534); }
+    .dash-table td { vertical-align: top; }
+  </style>
+  <link rel="icon" type="image/svg+xml" href="images/logo.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png" />
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
+  <link rel="stylesheet" href="theme.css" />
+  <script src="theme.js"></script>
+</head>
+<body class="dashboard-page">
+
+  <header class="topbar">
+    <div class="container nav-wrap">
+      <div class="dashboard-user-bar">
+        <button class="topbar-mobile-toggle" id="sidebarToggle" aria-label="Toggle Navigation Sidebar">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <a href="admin-dashboard.html" class="brand" aria-label="FixConnect AI admin">
+          <span class="brand-mark" style="background:none;border:0;box-shadow:none;padding:0;overflow:hidden"><img src="images/logo.svg" alt="" aria-hidden="true" style="width:100%;height:100%;display:block;border-radius:inherit" /></span>
+          <span class="brand-text">FixConnect AI · Admin</span>
+        </a>
+      </div>
+      <nav class="main-nav" aria-label="Admin navigation">
+        <a href="index.html" target="_blank" rel="noopener">View Website</a>
+        <a href="swagger-ui.html" target="_blank" rel="noopener">API Docs</a>
+        <a href="#" class="nav-button nav-button-light logout-link">Logout</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="dashboard-layout">
+
+    <aside class="sidebar" id="sidebar">
+      <div>
+        <div class="sidebar-header">
+          <span class="sidebar-role-tag">Admin Console</span>
+          <h2 class="sidebar-user-name">Administrator</h2>
+        </div>
+
+        <ul class="sidebar-nav">
+          <li class="sidebar-nav-item">
+            <a class="sidebar-link active" data-section="overview">
+              <i class="fa-solid fa-gauge-high"></i><span>Overview</span>
+            </a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a class="sidebar-link" data-section="verification">
+              <i class="fa-solid fa-user-check"></i><span>Pending Verification</span>
+            </a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a class="sidebar-link" data-section="providers">
+              <i class="fa-solid fa-user-gear"></i><span>Service Providers</span>
+            </a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a class="sidebar-link" data-section="customers">
+              <i class="fa-solid fa-users"></i><span>Customers</span>
+            </a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a class="sidebar-link" data-section="deactivated">
+              <i class="fa-solid fa-user-slash"></i><span>Deactivated Accounts</span>
+            </a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a href="#" class="sidebar-link logout-link">
+              <i class="fa-solid fa-right-from-bracket"></i><span>Logout</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-status-card">
+          <div class="sidebar-status-info">
+            <span class="status-dot"></span>
+            <span class="status-text">Administrator access</span>
+          </div>
+          <i class="fa-solid fa-shield-halved" style="color: var(--fcd-tx-1c6fe5, var(--blue-700));"></i>
+        </div>
+      </div>
+    </aside>
+
+    <main class="dashboard-main">
+
+      <section class="dashboard-section active" id="section-overview">
+        <div class="section-top-header">
+          <div>
+            <h1>Admin Overview</h1>
+            <p>Platform health at a glance - verify new technicians and manage account access.</p>
+          </div>
+          <div class="section-actions">
+            <button class="btn-primary-custom" onclick="switchSection('verification')">
+              <i class="fa-solid fa-user-check"></i> Review Pending
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="dashboard-section" id="section-verification">
+        <div class="section-top-header">
+          <div>
+            <h1>Pending Verification</h1>
+            <p>New service providers can go online and receive jobs only after you approve them.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="dashboard-section" id="section-providers">
+        <div class="section-top-header">
+          <div>
+            <h1>Service Providers</h1>
+            <p>Verify technicians, and deactivate or reactivate their accounts.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="dashboard-section" id="section-customers">
+        <div class="section-top-header">
+          <div>
+            <h1>Customers</h1>
+            <p>Customers manage their own bookings. Admins can only deactivate or reactivate an account.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="dashboard-section" id="section-deactivated">
+        <div class="section-top-header">
+          <div>
+            <h1>Deactivated Accounts</h1>
+            <p>Customers and service providers who currently cannot log in. Reactivate to restore access.</p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="api.js"></script>
+  <script src="admin-dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us | FixConnect AI</title>
+  <meta name="description" content="Get in touch with FixConnect AI for service support, technician inquiries, and customer assistance in Hyderabad." />
+  
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    :root {
+      --navy-dark: #0a192f;
+      --navy-main: #102a5c;
+      --blue-primary: #1c6fe5;
+      --blue-hover: #123d69;
+      --blue-light: #eff6ff;
+      --blue-border: #dbeafe;
+      --slate-body: #475569;
+      --slate-bg: #f8fafc;
+      --white: #ffffff;
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --shadow-sm: 0 4px 20px rgba(16, 42, 92, 0.06);
+      --shadow-md: 0 10px 30px rgba(16, 42, 92, 0.1);
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--fcd-bg-f8fafc, var(--slate-bg));
+      color: var(--fcd-tx-0a192f, var(--navy-dark));
+      margin: 0;
+      padding: 0;
+    }
+
+    /* HERO SECTION */
+    .contact-hero {
+      text-align: center;
+      padding: 60px 20px 40px;
+      background: linear-gradient(180deg, var(--fcd-bg-edf4ff, #edf4ff) 0%, var(--fcd-bg-f8fafc, var(--slate-bg)) 100%);
+      border-bottom: 1px solid var(--fcd-bd-e2e8f0, #e2e8f0);
+    }
+
+    .contact-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      background: var(--fcd-bg-ffffff, var(--white));
+      border: 1px solid var(--fcd-bd-dbeafe, var(--blue-border));
+      border-radius: 999px;
+      color: var(--fcd-tx-1c6fe5, var(--blue-primary));
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.08);
+    }
+
+    .contact-hero h1 {
+      font-size: 2.75rem;
+      font-weight: 800;
+      color: var(--fcd-tx-102a5c, var(--navy-main));
+      margin: 0 0 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .contact-hero h1 span {
+      color: var(--fcd-tx-1c6fe5, var(--blue-primary));
+    }
+
+    .contact-hero p {
+      max-width: 620px;
+      margin: 0 auto;
+      color: var(--fcd-tx-475569, var(--slate-body));
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+
+    /* MAIN CONTAINER */
+    .contact-container {
+      max-width: 1180px;
+      margin: 40px auto 70px;
+      padding: 0 20px;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.35fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    /* CONTACT INFO SIDEBAR */
+    .contact-info-card {
+      background: var(--navy-main);
+      color: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 40px 32px;
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-info-card::before {
+      content: '';
+      position: absolute;
+      top: -50px;
+      right: -50px;
+      width: 180px;
+      height: 180px;
+      background: rgba(37, 99, 235, 0.15);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .contact-info-card h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin: 0 0 12px;
+      color: var(--white);
+    }
+
+    .contact-info-card > p {
+      color: #cbd5e1;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 32px;
+    }
+
+    .info-list {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .info-item-box {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .info-icon-circle {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      color: #60a5fa;
+      flex-shrink: 0;
+    }
+
+    .info-item-box h3 {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #94a3b8;
+      margin: 0 0 4px;
+      font-weight: 700;
+    }
+
+    .info-item-box p,
+    .info-item-box a {
+      color: var(--white);
+      font-size: 0.98rem;
+      font-weight: 600;
+      text-decoration: none;
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    .info-item-box a:hover {
+      color: #60a5fa;
+      text-decoration: underline;
+    }
+
+    .info-socials {
+      margin-top: 36px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .info-socials span {
+      font-size: 0.85rem;
+      color: #94a3b8;
+      font-weight: 600;
+      margin-right: 8px;
+    }
+
+    .social-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .social-btn:hover {
+      background: var(--blue-primary);
+      transform: translateY(-2px);
+    }
+
+    /* CONTACT FORM CARD */
+    .contact-form-card {
+      background: var(--fcd-bg-ffffff, var(--white));
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--fcd-bd-e2e8f0, #e2e8f0);
+    }
+
+    .contact-form-card h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--fcd-tx-102a5c, var(--navy-main));
+      margin: 0 0 8px;
+    }
+
+    .form-subtitle {
+      color: var(--fcd-tx-475569, var(--slate-body));
+      font-size: 0.95rem;
+      margin-bottom: 28px;
+    }
+
+    .form-row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .input-field-group {
+      margin-bottom: 20px;
+    }
+
+    .input-field-group label {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--fcd-tx-334155, #334155);
+      margin-bottom: 8px;
+    }
+
+    .input-field-group input,
+    .input-field-group select,
+    .input-field-group textarea {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1px solid var(--fcd-bd-cbd5e1, #cbd5e1);
+      border-radius: var(--radius-md);
+      font-family: inherit;
+      font-size: 0.95rem;
+      color: var(--fcd-tx-0a192f, var(--navy-dark));
+      background-color: var(--fcd-bg-fcfdfe, #fcfdfe);
+      box-sizing: border-box;
+      transition: all 0.2s ease;
+    }
+
+    .input-field-group input:focus,
+    .input-field-group select:focus,
+    .input-field-group textarea:focus {
+      outline: none;
+      border-color: var(--blue-primary);
+      background-color: var(--fcd-bg-ffffff, var(--white));
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    }
+
+    .input-field-group textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
+
+    .submit-btn-custom {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 999px;
+      background: var(--navy-main);
+      color: var(--white);
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 14px rgba(16, 42, 92, 0.2);
+    }
+
+    .submit-btn-custom:hover {
+      background: var(--blue-primary);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.25);
+    }
+
+    /* FAQ SECTION */
+    .faq-section {
+      margin-top: 70px;
+      padding-top: 50px;
+      border-top: 1px solid var(--fcd-bd-e2e8f0, #e2e8f0);
+    }
+
+    .faq-section-title {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    .faq-section-title h2 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--fcd-tx-102a5c, var(--navy-main));
+      margin: 0 0 10px;
+    }
+
+    .faq-section-title p {
+      color: var(--fcd-tx-475569, var(--slate-body));
+      font-size: 0.98rem;
+    }
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .faq-card {
+      background: var(--fcd-bg-ffffff, var(--white));
+      border-radius: var(--radius-md);
+      padding: 24px;
+      border: 1px solid var(--fcd-bd-e2e8f0, #e2e8f0);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+    }
+
+    .faq-card-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: var(--fcd-bg-eff6ff, var(--blue-light));
+      color: var(--fcd-tx-1c6fe5, var(--blue-primary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      margin-bottom: 14px;
+    }
+
+    .faq-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--fcd-tx-102a5c, var(--navy-main));
+      margin: 0 0 8px;
+    }
+
+    .faq-card p {
+      color: var(--fcd-tx-475569, var(--slate-body));
+      font-size: 0.88rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 992px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+      .faq-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .form-row-2 {
+        grid-template-columns: 1fr;
+      }
+      .contact-hero h1 {
+        font-size: 2.1rem;
+      }
+      .contact-form-card,
+      .contact-info-card {
+        padding: 24px;
+      }
+    }
+  </style>
+  <link rel="icon" type="image/svg+xml" href="images/logo.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png" />
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
+  <link rel="stylesheet" href="theme.css" />
+  <script src="theme.js"></script>
+</head>
+<body>
+
+  <!-- MASTER TOPBAR (Identical to Home Page) -->
+  <header class="topbar">
+    <div class="container nav-wrap">
+      <a href="index.html" class="brand" aria-label="FixConnect AI home">
+        <span class="brand-mark" style="background:none;border:0;box-shadow:none;padding:0;overflow:hidden"><img src="images/logo.svg" alt="" aria-hidden="true" style="width:100%;height:100%;display:block;border-radius:inherit" /></span>
+        <span class="brand-text">FixConnect AI</span>
+      </a>
+
+      <nav class="main-nav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="service.html">Services</a>
+        <a href="about.html">About</a>
+        <a href="contact.html" class="active">Contact</a>
+        <a href="login.html" class="nav-button nav-button-light">Login</a>
+        <a href="signup.html" class="nav-button nav-button-light">Sign Up</a>
+        <a href="emergency.html" class="nav-button nav-button-accent">Emergency SOS</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="contact-hero">
+    <div class="contact-hero-badge">
+      <i class="fa-solid fa-headset"></i> We're Here to Help
+    </div>
+    <h1>Get in <span>Touch</span> with FixConnect AI</h1>
+    <p>
+      Have a question about our services, need help booking a verified technician, or want feedback? 
+      Reach out and our support team will assist you right away.
+    </p>
+  </section>
+
+  <!-- MAIN CONTENT CONTAINER -->
+  <main class="contact-container">
+    <div class="contact-grid">
+
+      <!-- LEFT SIDEBAR: CONTACT INFO -->
+      <div class="contact-info-card">
+        <h2>Contact Information</h2>
+        <p>
+          Connect with us through any of the channels below or fill out the inquiry form.
+        </p>
+
+        <div class="info-list">
+          <div class="info-item-box">
+            <div class="info-icon-circle">
+              <i class="fa-solid fa-envelope"></i>
+            </div>
+            <div>
+              <h3>Email Us</h3>
+              <a href="mailto:adminfixconnectai@gmail.com">adminfixconnectai@gmail.com</a>
+            </div>
+          </div>
+
+          <div class="info-item-box">
+            <div class="info-icon-circle">
+              <i class="fa-solid fa-phone"></i>
+            </div>
+            <div>
+              <h3>Call Support</h3>
+              <a href="tel:+919876543210">+91 98765 43210</a>
+            </div>
+          </div>
+
+          <div class="info-item-box">
+            <div class="info-icon-circle">
+              <i class="fa-solid fa-location-dot"></i>
+            </div>
+            <div>
+              <h3>Head Office</h3>
+              <p>Road No. 36, Jubilee Hills,<br>Hyderabad, Telangana 500033</p>
+            </div>
+          </div>
+
+          <div class="info-item-box">
+            <div class="info-icon-circle">
+              <i class="fa-solid fa-clock"></i>
+            </div>
+            <div>
+              <h3>Support Hours</h3>
+              <p>Monday – Saturday: 9:00 AM – 6:00 PM<br><span style="color: #60a5fa; font-weight: 700;">Emergency SOS: 24/7 Available</span></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-socials">
+          <span>Follow Us:</span>
+          <a href="#" class="social-btn" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="social-btn" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#" class="social-btn" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="#" class="social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+      </div>
+
+      <!-- RIGHT SIDE: CONTACT FORM -->
+      <div class="contact-form-card">
+        <h2>Send Us a Message</h2>
+        <p class="form-subtitle">Fill in your details below and our team will respond within 2 hours.</p>
+
+        <form id="contactForm">
+          <div class="form-row-2">
+            <div class="input-field-group">
+              <label for="name">Full Name *</label>
+              <input type="text" id="name" placeholder="e.g. Naga Sudha" required />
+            </div>
+
+            <div class="input-field-group">
+              <label for="email">Email Address *</label>
+              <input type="email" id="email" placeholder="nagasudha@example.com" required />
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="input-field-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" placeholder="+91 98765 XXXXX" />
+            </div>
+
+            <div class="input-field-group">
+              <label for="service">Service Category *</label>
+              <select id="service" required>
+                <option value="">Select Service Category</option>
+                <option value="AC Repair">AC Repair & Maintenance</option>
+                <option value="Plumbing">Plumbing Services</option>
+                <option value="Electrical">Electrical Repair</option>
+                <option value="Appliance Repair">Appliance Repair</option>
+                <option value="Cleaning">Home Deep Cleaning</option>
+                <option value="Carpentry">Carpentry & Furniture</option>
+                <option value="Other">General Inquiry / Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="input-field-group">
+            <label for="subject">Subject *</label>
+            <input type="text" id="subject" placeholder="How can we help you?" required />
+          </div>
+
+          <div class="input-field-group">
+            <label for="details">Message *</label>
+            <textarea id="details" placeholder="Describe your requirement or question in detail..." required></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn-custom">
+            <i class="fa-solid fa-paper-plane"></i> Send Message
+          </button>
+
+          <div id="message"></div>
+        </form>
+      </div>
+
+    </div>
+
+    <!-- FAQ SUPPORT SECTION -->
+    <section class="faq-section">
+      <div class="faq-section-title">
+        <h2>Need Quick Answers?</h2>
+        <p>Frequently asked questions about FixConnect AI home services.</p>
+      </div>
+
+      <div class="faq-grid">
+        <div class="faq-card">
+          <div class="faq-card-icon"><i class="fa-solid fa-bolt"></i></div>
+          <h3>How fast does a technician arrive?</h3>
+          <p>For standard bookings, technicians arrive at your selected time slot. For Emergency SOS dispatches, technicians arrive within 15–30 minutes.</p>
+        </div>
+
+        <div class="faq-card">
+          <div class="faq-card-icon"><i class="fa-solid fa-shield-halved"></i></div>
+          <h3>Are technicians verified?</h3>
+          <p>Yes. Every technician undergoes background verification, identity check, and skill accreditation before joining FixConnect AI.</p>
+        </div>
+
+        <div class="faq-card">
+          <div class="faq-card-icon"><i class="fa-solid fa-rotate-left"></i></div>
+          <h3>Is there a warranty on repairs?</h3>
+          <p>All completed repairs come with a complimentary 30-day FixConnect service guarantee for total peace of mind.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MASTER FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <a href="index.html" class="brand footer-brand" aria-label="FixConnect AI home">
+          <span class="brand-mark" style="background:none;border:0;box-shadow:none;padding:0;overflow:hidden"><img src="images/logo.svg" alt="" aria-hidden="true" style="width:100%;height:100%;display:block;border-radius:inherit" /></span>
+          <span class="brand-text">FixConnect AI</span>
+        </a>
+        <p class="footer-copy">
+          Premium support for modern homes through AI-guided service discovery and skilled repairs.
+        </p>
+      </div>
+
+      <div>
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="service.html">Services</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3>Service</h3>
+        <ul>
+          <li><a href="service.html">Plumbing</a></li>
+          <li><a href="service.html">Electrical</a></li>
+          <li><a href="service.html">AC Repair</a></li>
+          <li><a href="service.html">Appliance Repair</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3>Contact</h3>
+        <ul>
+          <li><a href="mailto:adminfixconnectai@gmail.com">adminfixconnectai@gmail.com</a></li>
+          <li><a href="tel:+919876543210">+91 98765 43210</a></li>
+          <li><span>Hyderabad, India</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <span>© 2026 FixConnect AI</span>
+        <div class="legal-links">
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms &amp; Conditions</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FORM SCRIPT -->
+  <script src="api.js"></script>
+  <script>
+    const FC = window.FixConnect;
+    const contactForm = document.getElementById("contactForm");
+    const message = document.getElementById("message");
+
+    function showMessage(html, ok) {
+      message.innerHTML = html;
+      Object.assign(message.style, ok
+        ? { color: "#16a34a", background: "#f0fdf4", border: "1px solid #bbf7d0" }
+        : { color: "#b91c1c", background: "#fef2f2", border: "1px solid #fecaca" },
+        { padding: "12px 16px", borderRadius: "10px", marginTop: "16px", fontSize: "0.9rem", fontWeight: "600" });
+    }
+
+    // Prefill for logged-in users
+    const me = FC.getUser();
+    if (me) {
+      document.getElementById("name").value ||= me.fullName || "";
+      document.getElementById("email").value ||= me.email || "";
+      document.getElementById("phone").value ||= me.phone || "";
+    }
+
+    if (contactForm) {
+      contactForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
+        const btn = contactForm.querySelector('button[type="submit"]');
+        const val = id => document.getElementById(id).value.trim();
+        const err = FC.firstError(
+          FC.nameError(val("name")),
+          FC.emailError(val("email")),
+          FC.phoneError(val("phone"), true),
+          val("service") ? null : "Please choose a service.",
+          FC.textError(val("subject"), { label: "Subject", min: 3, max: 200 }),
+          FC.textError(val("details"), { label: "Details", min: 10, max: 3000 }));
+        if (err) return showMessage(err, false);
+        await FC.busy(btn, async () => {
+          try {
+            const res = await FC.api.post("/api/contact", {
+              name: val("name"), email: val("email"), phone: val("phone") || null,
+              service: val("service"), subject: val("subject"), details: val("details")
+            }, { auth: false });
+            showMessage("<i class='fa-solid fa-circle-check'></i> " + FC.esc(res.message) + " (Ref #" + res.referenceId + ")", true);
+            contactForm.reset();
+          } catch (err) {
+            showMessage("<i class='fa-solid fa-circle-exclamation'></i> " + FC.esc(err.message), false);
+          }
+        });
+      });
+    }
+  </script>
+</body>
+</html>

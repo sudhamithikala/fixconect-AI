@@ -1,0 +1,15 @@
+target/
+data/
+uploads/
+.git/
+.github/
+.settings/
+.classpath
+.project
+.factorypath
+.idea/
+.vscode/
+*.iml
+setup-https.ps1
+setup-https.sh
+supabase-remove-demo-data.sql

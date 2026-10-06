@@ -1,0 +1,105 @@
+server:
+  port: ${PORT:8080}   # Render sets PORT; 8080 everywhere else
+  # Behind the HTTPS proxy (Caddy): trust its X-Forwarded-* headers
+  forward-headers-strategy: framework
+
+spring:
+  # Passwords and keys live in fixconnect-secrets.yml (kept out of GitHub).
+  # Found in src/main/resources on your PC/EC2, or in /etc/secrets on Render.
+  config:
+    import:
+      - optional:classpath:fixconnect-secrets.yml
+      - optional:file:/etc/secrets/fixconnect-secrets.yml
+  application:
+    name: fixconnect-backend
+  # Database: PostgreSQL on Supabase (session pooler).
+  # The address, user and password are in fixconnect-secrets.yml.
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      # Supabase's free session pooler allows only a few connections - keep the pool small
+      maximum-pool-size: 5
+      minimum-idle: 1
+      connection-timeout: 20000
+      idle-timeout: 300000
+      max-lifetime: 1500000
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update        # creates / updates the tables automatically
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+  h2:
+    console:
+      enabled: false
+  # SMTP used for password-reset e-mails. For Gmail: enable 2-Step Verification, create an App Password
+  # (Google Account > Security > App passwords) and set MAIL_USERNAME / MAIL_PASSWORD as environment variables.
+  mail:
+    host: ${MAIL_HOST:smtp.gmail.com}
+    port: ${MAIL_PORT:587}
+    # username and password: in fixconnect-secrets.yml
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          connectiontimeout: 10000
+          timeout: 10000
+          writetimeout: 10000
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 12MB
+  jackson:
+    default-property-inclusion: non_null
+    serialization:
+      write-dates-as-timestamps: false
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: method
+    tags-sorter: alpha
+    display-request-duration: true
+    persist-authorization: true
+
+fixconnect:
+  # The website is bundled in src/main/resources/static. Optional: point this at a folder on disk
+  # to serve pages from there instead while editing (e.g. C:/Users/you/Downloads/SE/SE/SE project).
+  frontend-dir: ${FIXCONNECT_FRONTEND_DIR:}
+  jwt:
+    # >= 32 characters. Override with env var FIXCONNECT_JWT_SECRET in production.
+    secret: ${FIXCONNECT_JWT_SECRET:change-me-fixconnect-ai-super-secret-key-2026!}
+    expiration-minutes: 1440
+  firebase:
+    project-id: fixconnect-ai
+  # Public address of the site, used in the forgot-password and admin e-mail links.
+  # On Render, change this to the address Render gives you (e.g. https://fixconnect-ai.onrender.com).
+  app-base-url: https://fixconnect-ai.onrender.com
+  admin:
+    # Gets an e-mail with a "Review & Verify" link whenever a new service provider signs up
+    alert-email: adminfixconnectai@gmail.com
+  mail:
+    from: adminfixconnectai@gmail.com   # must be a sender verified in Brevo
+    # Brevo API key (in fixconnect-secrets.yml): e-mails go out over HTTPS through Brevo; empty = Gmail SMTP.
+    # brevo-api-key: in fixconnect-secrets.yml
+    from-name: FixConnect AI
+  auth:
+    reset-token-minutes: 30
+    # Seconds a user must wait before another reset e-mail is sent
+    reset-resend-cooldown-seconds: 60
+    # DEV ONLY: also return the reset token in the API response. Never enable in production.
+    expose-reset-token: ${EXPOSE_RESET_TOKEN:false}
+  upload-dir: ./uploads
+  emergency:
+    hotline: "+91 98765 43210"
+    radius-km: 5
+  seed-demo-data: false   # no dummy customers, technicians or bookings
+  cors:
+    allowed-origins: "*"

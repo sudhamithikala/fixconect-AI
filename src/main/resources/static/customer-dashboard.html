@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Customer Dashboard | FixConnect AI</title>
+  <meta name="description" content="Manage your home repair services, book verified technicians, and track active requests on FixConnect AI." />
+  
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="leaflet.css" />
+  <link rel="stylesheet" href="dashboard.css" />
+  <link rel="icon" type="image/svg+xml" href="images/logo.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png" />
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
+  <link rel="stylesheet" href="theme.css" />
+  <script src="theme.js"></script>
+</head>
+<body class="dashboard-page">
+
+  <!-- MASTER TOPBAR (Identical to Home Page) -->
+  <header class="topbar">
+    <div class="container nav-wrap">
+      <div class="dashboard-user-bar">
+        <button class="topbar-mobile-toggle" id="sidebarToggle" aria-label="Toggle Navigation Sidebar">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <a href="index.html" class="brand" aria-label="FixConnect AI home">
+          <span class="brand-mark" style="background:none;border:0;box-shadow:none;padding:0;overflow:hidden"><img src="images/logo.svg" alt="" aria-hidden="true" style="width:100%;height:100%;display:block;border-radius:inherit" /></span>
+          <span class="brand-text">FixConnect AI</span>
+        </a>
+      </div>
+
+      <nav class="main-nav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="service.html">Services</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="customer-dashboard.html" class="nav-button nav-button-light active">Dashboard</a>
+        <a href="customer-profile.html" class="nav-button nav-button-light">Profile</a>
+        <a href="emergency.html" class="nav-button nav-button-accent">Emergency SOS</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- DASHBOARD LAYOUT: SIDEBAR + MAIN CONTENT -->
+  <div class="dashboard-layout">
+
+    <!-- LEFT SIDEBAR WITH 20 CUSTOMER MODULES -->
+    <aside class="sidebar" id="sidebar">
+      <div>
+        <div class="sidebar-header">
+          <span class="sidebar-role-tag">Customer Account</span>
+          <h2 class="sidebar-user-name"><span class="sk" style="width:120px"></span></h2>
+        </div>
+
+        <ul class="sidebar-nav">
+          <li class="sidebar-nav-item">
+            <a class="sidebar-link active" data-section="dashboard">
+              <i class="fa-solid fa-gauge-high"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a class="sidebar-link" data-section="request">
+              <i class="fa-solid fa-plus-circle"></i>
+              <span>Request a Service</span>
+            </a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a class="sidebar-link" data-section="complaints">
+              <i class="fa-solid fa-clipboard-list"></i>
+              <span>My Complaints</span>
+            </a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a class="sidebar-link" data-section="ai-analysis">
+              <i class="fa-solid fa-wand-magic-sparkles"></i>
+              <span>AI Problem Analysis</span>
+            </a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a class="sidebar-link" data-section="technicians">
+              <i class="fa-solid fa-user-gear"></i>
+              <span>Find Technicians</span>
+            </a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a class="sidebar-link" data-section="upcoming">
+              <i class="fa-solid fa-clock"></i>
+              <span>Upcoming Services</span>
+            </a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a class="sidebar-link" data-section="ongoing">
+              <i class="fa-solid fa-spinner"></i>
+              <span>Ongoing Service</span>
+            </a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a class="sidebar-link" data-section="tracking">
+              <i class="fa-solid fa-location-crosshairs"></i>
+              <span>Live Technician Tracking</span>
+            </a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a class="sidebar-link" data-section="eta">
+              <i class="fa-solid fa-business-time"></i>
+              <span>ETA / Service Status</span>
+            </a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a class="sidebar-link" data-section="photos">
+              <i class="fa-solid fa-images"></i>
+              <span>Before &amp; After Photos</span>
+            </a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a class="sidebar-link" data-section="invoices">
+              <i class="fa-solid fa-file-invoice-dollar"></i>
+              <span>Digital Invoices</span>
+            </a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a class="sidebar-link" data-section="notifications">
+              <i class="fa-solid fa-bell"></i>
+              <span>Notifications</span>
+            </a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a class="sidebar-link" data-section="history">
+              <i class="fa-solid fa-history"></i>
+              <span>Service History</span>
+            </a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a href="customer-profile.html" class="sidebar-link">
+              <i class="fa-solid fa-user"></i>
+              <span>My Profile</span>
+            </a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a class="sidebar-link" data-section="settings">
+              <i class="fa-solid fa-gear"></i>
+              <span>Settings</span>
+            </a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a class="sidebar-link sos-link" data-section="emergency">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+              <span>Emergency SOS</span>
+            </a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a href="login.html" class="sidebar-link logout-link">
+              <i class="fa-solid fa-right-from-bracket"></i>
+              <span>Logout</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-status-card">
+          <div class="sidebar-status-info">
+            <span class="status-dot"></span>
+            <span class="status-text">Account Verified</span>
+          </div>
+          <i class="fa-solid fa-circle-check" style="color: var(--fcd-tx-16a34a, var(--green-600));"></i>
+        </div>
+      </div>
+    </aside>
+
+    <!-- RIGHT MAIN CONTENT CONTAINER -->
+    <main class="dashboard-main">
+
+      <!-- ================= MODULE 1: DASHBOARD HOME ================= -->
+      <section class="dashboard-section active" id="section-dashboard">
+        <div class="section-top-header">
+          <div>
+            <h1><span class="sk" style="width:260px;height:1.6rem;"></span></h1>
+            <p>Manage home services, track active technicians, and review past visits.</p>
+          </div>
+          <div class="section-actions">
+            <button class="btn-primary-custom" onclick="switchSection('request')">
+              <i class="fa-solid fa-plus"></i> Request Service
+            </button>
+            <button class="btn-danger-custom" onclick="switchSection('emergency')" style="background: #991b1b;">
+              <i class="fa-solid fa-triangle-exclamation"></i> SOS
+            </button>
+          </div>
+        </div>
+
+        <!-- STATS CARDS -->
+        <div class="stats-grid-4">
+          <div class="stat-card-modern">
+            <div class="stat-icon-wrapper blue">
+              <i class="fa-solid fa-calendar-check"></i>
+            </div>
+            <div class="stat-content">
+              <label>Active Bookings</label>
+              <strong><span class="sk sk-num"></span></strong>
+              <span class="stat-subtext"><span class="sk" style="width:110px"></span></span>
+            </div>
+          </div>
+
+          <div class="stat-card-modern">
+            <div class="stat-icon-wrapper amber">
+              <i class="fa-solid fa-clock"></i>
+            </div>
+            <div class="stat-content">
+              <label>Pending Requests</label>
+              <strong><span class="sk sk-num"></span></strong>
+              <span class="stat-subtext"><span class="sk" style="width:110px"></span></span>
+            </div>
+          </div>
+
+          <div class="stat-card-modern">
+            <div class="stat-icon-wrapper green">
+              <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <div class="stat-content">
+              <label>Services Done</label>
+              <strong><span class="sk sk-num"></span></strong>
+              <span class="stat-subtext"><span class="sk" style="width:110px"></span></span>
+            </div>
+          </div>
+
+          <div class="stat-card-modern">
+            <div class="stat-icon-wrapper purple">
+              <i class="fa-solid fa-bell"></i>
+            </div>
+            <div class="stat-content">
+              <label>Notifications</label>
+              <strong><span class="sk sk-num"></span></strong>
+              <span class="stat-subtext"><span class="sk" style="width:110px"></span></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CLEAN LIGHT ACTIVE SERVICE CARD -->
+        <div class="active-service-card">
+          <div class="active-service-content">
+            <span class="sk sk-avatar"></span>
+            <div class="active-service-info" style="flex:1;">
+              <span class="sk sk-pill"></span>
+              <span class="sk sk-line sk-title" style="width:55%"></span>
+              <span class="sk sk-line " style="width:80%"></span>
+              <span class="sk sk-line " style="width:45%"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- MAIN DASHBOARD CONTENT GRID -->
+        <div class="grid-main-side">
+          <div>
+            <!-- UPCOMING BOOKINGS SUMMARY -->
+            <div class="dash-card" style="margin-bottom: 24px;">
+              <div class="dash-card-header">
+                <h2 class="dash-card-title"><i class="fa-solid fa-calendar-day"></i> Upcoming Services</h2>
+                <a class="btn-secondary-custom btn-sm" onclick="switchSection('upcoming')">View All</a>
+              </div>
+              <div class="dash-table-container">
+                <table class="dash-table">
+                  <thead>
+                    <tr>
+                      <th>Service</th>
+                      <th>Technician</th>
+                      <th>Date &amp; Time</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td><span class="sk" style="width:70%"></span></td><td><span class="sk" style="width:60%"></span></td><td><span class="sk" style="width:75%"></span></td><td><span class="sk" style="width:55%"></span></td><td><span class="sk" style="width:50%"></span></td></tr>
+                    <tr><td><span class="sk" style="width:70%"></span></td><td><span class="sk" style="width:60%"></span></td><td><span class="sk" style="width:75%"></span></td><td><span class="sk" style="width:55%"></span></td><td><span class="sk" style="width:50%"></span></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- RECOMMENDED TECHNICIANS (MULTIPLE DIFFERENT PROFILES & IMAGES) -->
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h2 class="dash-card-title"><i class="fa-solid fa-user-gear"></i> Top Rated Technicians</h2>
+                <a class="btn-secondary-custom btn-sm" onclick="switchSection('technicians')">Find All</a>
+              </div>
+              <div class="grid-2-col">
+                <div data-fc-skeleton="techcards" data-n="2"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT COLUMN SIDEBAR WIDGETS -->
+          <div>
+            <!-- NOTIFICATIONS SNAPSHOT -->
+            <div class="dash-card" style="margin-bottom: 24px;">
+              <div class="dash-card-header">
+                <h2 class="dash-card-title"><i class="fa-solid fa-bell"></i> Notifications</h2>
+                <a class="btn-secondary-custom btn-sm" onclick="switchSection('notifications')">View</a>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 12px;">
+                <div><span class="sk sk-line sk-title" style="width:40%"></span><span class="sk sk-line " style="width:85%"></span><span class="sk sk-line " style="width:35%"></span></div>
+                <div><span class="sk sk-line sk-title" style="width:45%"></span><span class="sk sk-line " style="width:80%"></span><span class="sk sk-line " style="width:30%"></span></div>
+              </div>
+            </div>
+
+            <!-- QUICK ACCESS LINKS -->
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h2 class="dash-card-title"><i class="fa-solid fa-bolt"></i> Quick Links</h2>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 8px;">
+                <button class="btn-secondary-custom" style="justify-content: flex-start;" onclick="switchSection('ai-analysis')">
+                  <i class="fa-solid fa-wand-magic-sparkles" style="color: var(--fcd-tx-1c6fe5, var(--blue-700));"></i> AI Problem Diagnostic
+                </button>
+                <button class="btn-secondary-custom" style="justify-content: flex-start;" onclick="switchSection('invoices')">
+                  <i class="fa-solid fa-file-invoice-dollar" style="color: var(--fcd-tx-16a34a, var(--green-600));"></i> Digital Invoices
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ================= MODULE 2: REQUEST A SERVICE ================= -->
+      <section class="dashboard-section" id="section-request">
+        <div class="section-top-header">
+          <div>
+            <h1>Request a Home Service</h1>
+            <p>Select your issue, attach details or photos, and let AI match you with verified technicians.</p>
+          </div>
+        </div>
+
+        <div class="dash-card" style="max-width: 860px;">
+          <form id="serviceRequestForm" onsubmit="handleRequestSubmit(event)">
+            <div class="grid-2-col">
+              <div class="form-group">
+                <label for="serviceCategory">Service Category *</label>
+                <select id="serviceCategory" class="form-control-custom" required>
+                  <option value="">Select Service Category</option>
+                  <option value="AC Repair & Maintenance">AC Repair &amp; Maintenance</option>
+                  <option value="Plumbing Services">Plumbing Services</option>
+                  <option value="Electrical Repair">Electrical Repair</option>
+                  <option value="Appliance Repair">Appliance Repair</option>
+                  <option value="Carpentry & Furniture">Carpentry &amp; Furniture</option>
+                  <option value="House Painting">House Painting</option>
+                  <option value="Home Cleaning">Home Cleaning</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="locationInput">Service Address / Location *</label>
+                <input type="text" id="locationInput" class="form-control-custom" placeholder="House / flat no., street, area, city" required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="complaintDesc">Describe Your Problem / Complaint *</label>
+              <textarea id="complaintDesc" class="form-control-custom" placeholder="Explain what is wrong (e.g. AC cooling not working, water leak under sink...)" required></textarea>
+            </div>
+
+            <!-- PHOTO UPLOAD -->
+            <div class="form-group">
+              <label>Upload Problem Photo (Optional)</label>
+              <div class="upload-dropzone" onclick="document.getElementById('photoInput').click()">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+                <p><strong>Click to upload</strong> or drag photo here</p>
+                <input type="file" id="photoInput" style="display: none;" accept="image/*" onchange="previewUpload(event)" />
+              </div>
+              <div id="uploadPreview" style="margin-top: 8px; font-weight: 700; color: var(--fcd-tx-1c6fe5, var(--blue-700)); font-size: 0.85rem;"></div>
+            </div>
+
+            <div class="grid-2-col">
+              <div class="form-group">
+                <label for="prefDate">Preferred Service Date *</label>
+                <input type="date" id="prefDate" class="form-control-custom" required />
+              </div>
+
+              <div class="form-group">
+                <label for="prefTime">Preferred Time Slot *</label>
+                <select id="prefTime" class="form-control-custom" required>
+                  <option value="Morning (9 AM - 12 PM)">Morning (9 AM - 12 PM)</option>
+                  <option value="Afternoon (12 PM - 3 PM)">Afternoon (12 PM - 3 PM)</option>
+                  <option value="Evening (3 PM - 6 PM)">Evening (3 PM - 6 PM)</option>
+                  <option value="Immediate Emergency">Immediate Emergency (SOS)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group" style="display: flex; align-items: center; gap: 10px; background: var(--fcd-bg-fef3c7, var(--amber-100)); padding: 12px; border-radius: var(--radius-md);">
+              <input type="checkbox" id="emergencyPriority" style="width: 18px; height: 18px; accent-color: var(--amber-600);" />
+              <label for="emergencyPriority" style="margin: 0; cursor: pointer; color: var(--fcd-tx-061a36, var(--navy-900)); font-size: 0.88rem;">
+                <strong>Mark as High Emergency Priority</strong> (Dispatch under 30 mins)
+              </label>
+            </div>
+
+            <div style="display: flex; gap: 12px; margin-top: 20px;">
+              <button type="submit" class="btn-primary-custom" style="flex: 1;">
+                <i class="fa-solid fa-paper-plane"></i> Submit Request
+              </button>
+              <button type="button" class="btn-secondary-custom" onclick="switchSection('ai-analysis')">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> Run AI Analysis
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+
+      <!-- ================= MODULE 3: MY COMPLAINTS ================= -->
+      <section class="dashboard-section" id="section-complaints">
+        <div class="section-top-header">
+          <div>
+            <h1>My Complaints &amp; Service Tickets</h1>
+            <p>Track reported complaints, diagnosis status, and resolution progress.</p>
+          </div>
+          <button class="btn-primary-custom" onclick="switchSection('request')">New Complaint</button>
+        </div>
+        <div data-fc-skeleton="table"></div>
+      </section>
+
+
+      <!-- ================= MODULE 4: AI PROBLEM ANALYSIS ================= -->
+      <section class="dashboard-section" id="section-ai-analysis">
+        <div class="section-top-header">
+          <div>
+            <h1>FixConnect AI Problem Analysis</h1>
+            <p>Describe your issue to receive instant AI root cause predictions and recommended service categories.</p>
+          </div>
+        </div>
+
+        <div class="grid-2-col">
+          <div class="dash-card">
+            <h2 class="dash-card-title" style="margin-bottom: 16px;">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> AI Problem Input
+            </h2>
+            <div class="form-group">
+              <label>Describe Problem Symptoms</label>
+              <textarea id="aiInputText" class="form-control-custom" placeholder="e.g. Fridge is making a loud buzzing sound and not freezing ice cream..."></textarea>
+            </div>
+            <button class="btn-primary-custom" style="width: 100%; margin-top: 10px;" onclick="runAiDiagnostic()">
+              <i class="fa-solid fa-brain"></i> Analyze Problem Now
+            </button>
+          </div>
+
+          <div class="ai-box-container" id="aiResultCard" style="display:none;">
+            <div class="ai-header">
+              <div class="ai-icon-sparkle"><i class="fa-solid fa-robot"></i></div>
+              <div>
+                <h3 style="margin: 0; color: var(--fcd-tx-061a36, var(--navy-900));">AI Diagnostic Result</h3>
+                <small style="color: var(--fcd-tx-1c6fe5, var(--blue-700)); font-weight: 700;"></small>
+              </div>
+            </div>
+            <p id="aiSummaryText" style="color: var(--fcd-tx-2d3a51, var(--slate-700)); font-size: 0.9rem; line-height: 1.5;">
+              
+            </p>
+            <div class="ai-result-grid">
+              <div class="ai-result-item">
+                <label>Category</label>
+                <p id="aiCat">-</p>
+              </div>
+              <div class="ai-result-item">
+                <label>Severity</label>
+                <p id="aiSev">-</p>
+              </div>
+              <div class="ai-result-item">
+                <label>Recommended Specialist</label>
+                <p id="aiTechCat">-</p>
+              </div>
+              <div class="ai-result-item">
+                <label>Estimated Cost</label>
+                <p id="aiEstCost">-</p>
+              </div>
+            </div>
+            <button class="btn-primary-custom" style="width: 100%; margin-top: 16px;" onclick="switchSection('request')">
+              <i class="fa-solid fa-circle-check"></i> Book Recommended Technician
+            </button>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ================= MODULE 5: FIND TECHNICIANS (6 MULTIPLE DIFFERENT PROFILES) ================= -->
+      <section class="dashboard-section" id="section-technicians">
+        <div class="section-top-header">
+          <div>
+            <h1>Find &amp; Book Technicians</h1>
+            <p>Browse verified specialists across all categories with realistic ratings and experience.</p>
+          </div>
+        </div>
+        <div data-fc-skeleton="cards" data-n="6"></div>
+      </section>
+
+
+
+
+      <!-- ================= MODULE 7: UPCOMING SERVICES ================= -->
+      <section class="dashboard-section" id="section-upcoming">
+        <div class="section-top-header">
+          <div>
+            <h1>Upcoming Services</h1>
+            <p>Manage your upcoming home appointments.</p>
+          </div>
+        </div>
+        <div data-fc-skeleton="table"></div>
+      </section>
+
+
+      <!-- ================= MODULE 8: ONGOING SERVICE ================= -->
+      <section class="dashboard-section" id="section-ongoing">
+        <div class="section-top-header">
+          <div>
+            <h1>Ongoing Service</h1>
+            <p>Real-time progress monitor for your active service visit.</p>
+          </div>
+        </div>
+        <div data-fc-skeleton="list" data-n="2"></div>
+      </section>
+
+
+      <!-- ================= MODULE 9: LIVE TECHNICIAN TRACKING ================= -->
+      <section class="dashboard-section" id="section-tracking">
+        <div class="section-top-header">
+          <div>
+            <h1>Live Technician Tracking</h1>
+            <p>Follow your assigned technician's real-time route.</p>
+          </div>
+        </div>
+
+        <div class="lt-wrap">
+          <div class="lt-map-holder">
+            <div id="ltMap" class="lt-map"></div>
+            <button type="button" class="lt-recenter" id="ltRecenter" title="Re-center"><i class="fa-solid fa-location-crosshairs"></i></button>
+          </div>
+          <div class="lt-sheet" id="ltSheet">
+            <div class="fc-loading"><i class="fa-solid fa-spinner fa-spin"></i> Loading live tracking…</div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ================= MODULE 10: ETA / SERVICE STATUS ================= -->
+      <section class="dashboard-section" id="section-eta">
+        <div class="section-top-header">
+          <div>
+            <h1>ETA / Service Status</h1>
+            <p>Step-by-step milestones for your active request.</p>
+          </div>
+        </div>
+        <div data-fc-skeleton="list" data-n="2"></div>
+      </section>
+
+
+
+
+      <!-- ================= MODULE 12: BEFORE & AFTER PHOTOS ================= -->
+      <section class="dashboard-section" id="section-photos">
+        <div class="section-top-header">
+          <div>
+            <h1>Before &amp; After Photos</h1>
+            <p>Proof-of-work inspection photos from technicians.</p>
+          </div>
+        </div>
+        <div data-fc-skeleton="cards" data-n="3"></div>
+      </section>
+
+
+      <!-- ================= MODULE 13: DIGITAL INVOICES ================= -->
+      <section class="dashboard-section" id="section-invoices">
+        <div class="section-top-header">
+          <div>
+            <h1>Digital Invoices</h1>
+            <p>Transparent billing history for completed jobs.</p>
+          </div>
+        </div>
+        <div data-fc-skeleton="table"></div>
+      </section>
+
+
+
+
+
+
+      <!-- ================= MODULE 16: NOTIFICATIONS ================= -->
+      <section class="dashboard-section" id="section-notifications">
+        <div class="section-top-header">
+          <div>
+            <h1>Notifications</h1>
+            <p>Real-time updates regarding service requests and offers.</p>
+          </div>
+        </div>
+        <div data-fc-skeleton="list" data-n="5"></div>
+      </section>
+
+
+      <!-- ================= MODULE 17: SERVICE HISTORY ================= -->
+      <section class="dashboard-section" id="section-history">
+        <div class="section-top-header">
+          <div>
+            <h1>Service History</h1>
+            <p>Archive of all past completed home services.</p>
+          </div>
+        </div>
+        <div data-fc-skeleton="table"></div>
+      </section>
+
+
+      <!-- ================= MODULE 18: MY PROFILE (CLEAN LIGHT STYLE, NO NAVY BLOCK) ================= -->
+      <section class="dashboard-section" id="section-profile">
+        <div class="section-top-header">
+          <div>
+            <h1>My Profile Details</h1>
+            <p>Manage your account info and primary service address.</p>
+          </div>
+        </div>
+        <div data-fc-skeleton="form" data-n="5"></div>
+      </section>
+
+
+      <!-- ================= MODULE 19: SETTINGS ================= -->
+      <section class="dashboard-section" id="section-settings">
+        <div class="section-top-header">
+          <div>
+            <h1>Settings &amp; Preferences</h1>
+            <p>Customize notifications and account preferences.</p>
+          </div>
+        </div>
+        <div data-fc-skeleton="list" data-n="3"></div>
+      </section>
+
+
+      <!-- ================= MODULE 20: EMERGENCY SOS ================= -->
+      <section class="dashboard-section" id="section-emergency">
+        <div class="section-top-header">
+          <div>
+            <h1 style="color: var(--fcd-tx-dc2626, #dc2626);"><i class="fa-solid fa-triangle-exclamation"></i> Emergency SOS</h1>
+            <p>Priority assistance for urgent home repair emergencies.</p>
+          </div>
+        </div>
+
+        <div class="dash-card" style="background: var(--fcd-bg-fef2f2, #fef2f2); border-color: var(--fcd-bd-fee2e2, #fee2e2); max-width: 760px;">
+          <h2 style="color: var(--fcd-tx-991b1b, #991b1b); margin-top: 0; font-size: 1.25rem;">Urgent Priority Dispatch</h2>
+          <p style="color: var(--fcd-tx-7f1d1d, #7f1d1d); line-height: 1.5; font-size: 0.9rem;">
+            Pressing SOS broadcasts an instant priority alert to all available verified technicians within 5 km.
+          </p>
+          <div style="display: flex; gap: 12px; margin-top: 18px;">
+            <button class="btn-danger-custom" onclick="triggerSosAlert()">
+              <i class="fa-solid fa-bolt-lightning"></i> Dispatch SOS Tech
+            </button>
+            <a href="tel:+919876543210" class="btn-secondary-custom" style="border-color: var(--fcd-bd-fca5a5, #fca5a5); color: var(--fcd-tx-991b1b, #991b1b);">
+              <i class="fa-solid fa-phone"></i> Emergency Hotline
+            </a>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <a href="index.html" class="brand footer-brand" aria-label="FixConnect AI home">
+          <span class="brand-mark" style="background:none;border:0;box-shadow:none;padding:0;overflow:hidden"><img src="images/logo.svg" alt="" aria-hidden="true" style="width:100%;height:100%;display:block;border-radius:inherit" /></span>
+          <span class="brand-text">FixConnect AI</span>
+        </a>
+        <p class="footer-copy">
+          Premium support for modern homes through AI-guided service discovery and skilled repairs.
+        </p>
+      </div>
+
+      <div>
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="service.html">Services</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3>Service</h3>
+        <ul>
+          <li><a href="service.html">Plumbing</a></li>
+          <li><a href="service.html">Electrical</a></li>
+          <li><a href="service.html">AC Repair</a></li>
+          <li><a href="service.html">Appliance Repair</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3>Contact</h3>
+        <ul>
+          <li><a href="mailto:adminfixconnectai@gmail.com">adminfixconnectai@gmail.com</a></li>
+          <li><a href="tel:+919876543210">+91 98765 43210</a></li>
+          <li><span>Hyderabad, India</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <span>© 2026 FixConnect AI</span>
+        <div class="legal-links">
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms &amp; Conditions</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript Interaction File -->
+  <script src="api.js"></script>
+  <script src="leaflet.js"></script>
+  <script src="live-tracking.js"></script>
+  <script src="customer-dashboard.js"></script>
+</body>
+</html>

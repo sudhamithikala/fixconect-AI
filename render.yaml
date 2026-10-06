@@ -1,0 +1,8 @@
+# Render blueprint for FixConnect AI (Render dashboard -> New -> Blueprint, pick this repo).
+# All settings are in src/main/resources/application.yml - nothing to fill in here.
+services:
+  - type: web
+    name: fixconnect-ai
+    runtime: docker
+    plan: free
+    healthCheckPath: /api/health

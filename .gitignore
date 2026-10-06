@@ -1,0 +1,15 @@
+target/
+data/
+uploads/
+*.iml
+.idea/
+.vscode/
+# Private settings (passwords, API keys) - never upload
+src/main/resources/fixconnect-secrets.yml
+fixconnect-secrets.yml
+# Eclipse / VS Code files
+.classpath
+.project
+.factorypath
+.settings/
+.github/modernize/

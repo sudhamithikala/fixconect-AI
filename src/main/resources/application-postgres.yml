@@ -1,0 +1,21 @@
+# PostgreSQL on Supabase (Session pooler, IPv4-friendly).
+# Run with:   java -jar fixconnect-backend.jar --spring.profiles.active=postgres
+#   or        mvn spring-boot:run -Dspring-boot.run.profiles=postgres
+# The database address, user and password are in fixconnect-secrets.yml (kept out of GitHub).
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      # Supabase's free session pooler allows only a few connections - keep the pool small
+      maximum-pool-size: 5
+      minimum-idle: 1
+      connection-timeout: 20000
+      idle-timeout: 300000
+      max-lifetime: 1500000
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update        # creates / updates the tables automatically on first start
+  h2:
+    console:
+      enabled: false

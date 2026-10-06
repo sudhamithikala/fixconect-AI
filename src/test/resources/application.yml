@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:fixconnect-test;DB_CLOSE_DELAY=-1
+fixconnect:
+  # tests run on a throw-away in-memory database and need the sample accounts
+  seed-demo-data: true
+  upload-dir: ./target/test-uploads
+  # tests read the token from the response instead of an inbox
+  auth:
+    expose-reset-token: true
+    reset-resend-cooldown-seconds: 0
